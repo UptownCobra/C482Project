@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 public class Inventory {
 
     private ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private ObservableList<Product> allProducts =  FXCollections.observableArrayList();
 
     public void addPart(Part newPart) {
         allParts.add(newPart);
@@ -22,7 +22,7 @@ public class Inventory {
     /**
      *
      * @param partId
-     * @return
+     * @return part
      */
     public Part lookupPart(int partId) {
 
@@ -32,12 +32,13 @@ public class Inventory {
             }
         }
         //TODO create return catch all
+        return null;
     }
 
     /**
      *
      * @param productId
-     * @return
+     * @return product
      */
     public Product lookupProduct(int productId) {
 
@@ -47,12 +48,13 @@ public class Inventory {
             }
         }
         //TODO add return catch all
+        return null;
     }
 
     /**
      *
      * @param partName
-     * @return
+     * @return part
      */
     public Part lookupPart(String partName) {
 
@@ -63,12 +65,13 @@ public class Inventory {
         }
         //TODO throw error if code gets here
         //TODO add catch all return
+        return null;
     }
 
     /**
      *
      * @param productName
-     * @return
+     * @return product
      */
     public Product lookupProduct(String productName) {
         //TODO add try catch for when there is no product matching productName
@@ -79,6 +82,7 @@ public class Inventory {
         }
         //TODO throw error if it gets here
         //TODO add catch all return
+        return null;
 
     }
 

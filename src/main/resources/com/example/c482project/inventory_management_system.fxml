@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="1284.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.c482project.inventoryManagementSystemController">
+   <children>
+      <Button fx:id="exitButton" layoutX="1179.0" layoutY="478.0" mnemonicParsing="false" onMouseClicked="#onExitButtonClick" prefHeight="25.0" prefWidth="79.0" text="Exit" />
+      <Pane accessibleText="Parts" layoutX="68.0" layoutY="108.0" prefHeight="336.0" prefWidth="566.0">
+         <children>
+            <TableView fx:id="partsTableView" layoutX="14.0" layoutY="53.0" prefHeight="233.0" prefWidth="543.0">
+              <columns>
+                <TableColumn fx:id="partIDTableColumn" prefWidth="91.0" text="Part IDs" />
+                <TableColumn fx:id="partNameTableColumn" prefWidth="155.0" text="Part Name" />
+                  <TableColumn fx:id="inventoryLevelTableColumn" prefWidth="106.0" text="Inventory Level" />
+                  <TableColumn fx:id="pricePerUnitTableColumn" prefWidth="190.0" text="Price/Cost per Unit" />
+              </columns>
+            </TableView>
+            <TextField fx:id="partsTextfield" layoutX="372.0" layoutY="28.0" prefHeight="25.0" prefWidth="180.0" promptText="Search by Part ID od Number" />
+            <Button fx:id="partsAdd" layoutX="390.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#onPartsAddClick" text="Add" />
+            <Button fx:id="partsModify" layoutX="434.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#onPartsModifyClick" text="Modify" />
+            <Button fx:id="partsDelete" layoutX="493.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#onPartsDeleteClick" text="Delete" />
+            <Text layoutX="34.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Text layoutX="68.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory Management System">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Pane accessibleText="Parts" layoutX="692.0" layoutY="108.0" prefHeight="336.0" prefWidth="566.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="692.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="108.0">
+         <children>
+            <TableView fx:id="productsTableView" layoutX="14.0" layoutY="53.0" prefHeight="233.0" prefWidth="543.0">
+               <columns>
+                  <TableColumn fx:id="productIDTableColumn" prefWidth="102.0" text="Product ID" />
+                  <TableColumn fx:id="productNameTableColumn" prefWidth="141.0" text="Product Name" />
+                  <TableColumn fx:id="inventoryLevelTableView" prefWidth="107.0" text="Inventory Level" />
+                  <TableColumn fx:id="pricePerUnitTableColumn" prefWidth="192.0" text="Price/Cost per Unit" />
+               </columns>
+            </TableView>
+            <TextField fx:id="productsTextField" layoutX="353.0" layoutY="28.0" prefHeight="25.0" prefWidth="199.0" promptText="Search by Product ID od Number" />
+            <Button fx:id="productsAddBtn" layoutX="390.0" layoutY="297.0" mnemonicParsing="false" text="Add" />
+            <Button fx:id="productsModifyBtn" layoutX="434.0" layoutY="297.0" mnemonicParsing="false" text="Modify" />
+            <Button fx:id="productsDeleteBtn" layoutX="493.0" layoutY="297.0" mnemonicParsing="false" text="Delete" />
+            <Text layoutX="34.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
