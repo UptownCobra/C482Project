@@ -1,6 +1,7 @@
 package com.example.c482project;
 
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,10 +34,11 @@ public class  c482Project extends Application {
         primaryStage = stage;
         Product newInHousePart = new Product(123, "test", 12.99,3,0,10);
         InHouse part1 = new InHouse(1, "test1", 12.99,5, 0, 5, 2);
+        Outsourced part2 = new Outsourced(2,"outsourced", 12.99, 3,0,13,"Test Company");
 
         inventory.addProduct(newInHousePart);
         inventory.addPart(part1);
-        inventoryManagementSystemController.initialize();
+        inventory.addPart(part2);
 
 
 

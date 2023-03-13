@@ -1,9 +1,11 @@
 package com.example.c482project;
 
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,30 +22,34 @@ public class inventoryManagementSystemController {
     public Button partsAdd;
     public Button partsModify;
     public Button partsDelete;
-    
-    public static TableView<Product> productTableView = new TableView<>();
-    public static TableColumn<Product, String> productIDTableColumn = new TableColumn<>();
-    public static TableColumn<Product, String> productNameTableColumn= new TableColumn<>();
-    public static TableColumn<Product, String> productInventoryLevelTableView= new TableColumn<>();
-    public static TableColumn<Product, String> productPricePerUnitTableColumn= new TableColumn<>();
+    @FXML
+    TableView<Product> productTableView = new TableView<>();
+    @FXML
+    TableColumn<Product, Integer> productIDTableColumn = new TableColumn<>();
+    @FXML
+    TableColumn<Product, String> productNameTableColumn= new TableColumn<>();
+    @FXML
+    TableColumn<Product, Integer> productInventoryLevelTableView= new TableColumn<>();
+    @FXML
+    TableColumn<Product, Double> productPricePerUnitTableColumn= new TableColumn<>();
     public TextField productsTextField;
     public Button productsAddBtn;
     public Button productsModifyBtn;
     public Button productsDeleteBtn;
     public TextField partsTextfield;
     @FXML
-    public static TableColumn<InHouse, String> partNameTableColumn = new TableColumn("Part Name");
+    TableColumn<Part, String> partNameTableColumn = new TableColumn<>();
 
 
     @FXML
-    public static TableColumn<InHouse, String> partIDTableColumn = new TableColumn("Part ID");
+    TableColumn<Part, Integer> partIDTableColumn = new TableColumn<>();
     @FXML
-    public static TableColumn<InHouse, String> inventoryLevelTableColumn = new TableColumn("Inventory Level");
+    TableColumn<Part, Integer> partInventoryLevelTableColumn = new TableColumn<>();
     @FXML
-    public static TableColumn<InHouse, String> pricePerUnitTableColumn = new TableColumn("Price/Cost per Unit");
+    TableColumn<Part, Double> partPricePerUnitTableColumn = new TableColumn<>();
 
     @FXML
-    public static TableView<Part> partsTableView = new TableView<>();
+    TableView<Part> partsTableView = new TableView<>();
 
     @FXML
     private void onExitButtonClick() {
@@ -62,24 +68,23 @@ public class inventoryManagementSystemController {
     }
 
 
-    public TableColumn getPartIDTableColumn() {
-        return partIDTableColumn;
-    }
 
-    public void setPartIDTableColumn(TableColumn partIDTableColumn) {
-        this.partIDTableColumn = partIDTableColumn;
-    }
+@FXML
+   public void initialize() {
+        //Initializing Product Table View
+        productTableView.setItems(c482Project.inventory.getAllProducts());
+        productIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInventoryLevelTableView.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPricePerUnitTableColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-   public static void initialize() {
-        productIDTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getId())));
-        productNameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getStock())));
-       productInventoryLevelTableView.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        productPricePerUnitTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getPrice())));
-   //    inventoryLevelTableColumn.setCellFactory(new PropertyValueFactory<Inventory, String>("stock"));
-   //    partNameTableColumn.setCellFactory(new PropertyValueFactory<Inventory, String>("name"));
-       //pricePerUnitTableColumn.setCellFactory(new PropertyValueFactory<Inventory, String>("cost"));
-       productTableView.getColumns().addAll(productIDTableColumn,productNameTableColumn,productInventoryLevelTableView,productPricePerUnitTableColumn);
-       productTableView.setItems(c482Project.allProducts);
+       //Initialize Parts Table
+        partsTableView.setItems(c482Project.inventory.getAllParts());
+        partIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInventoryLevelTableColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPricePerUnitTableColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
    }
 
 }
