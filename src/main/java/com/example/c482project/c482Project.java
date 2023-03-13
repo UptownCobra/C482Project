@@ -32,11 +32,14 @@ public class  c482Project extends Application {
         stage.setScene(scene);
         stage.show();
         primaryStage = stage;
-        Product newInHousePart = new Product(123, "test", 12.99,3,0,10);
+        Product product1 = new Product(123, "test", 12.99,3,0,10);
+        Product product2 = new Product(124, "check", 12.99,3,0,10);
+
         InHouse part1 = new InHouse(1, "test1", 12.99,5, 0, 5, 2);
         Outsourced part2 = new Outsourced(2,"outsourced", 12.99, 3,0,13,"Test Company");
 
-        inventory.addProduct(newInHousePart);
+        inventory.addProduct(product1);
+        inventory.addProduct(product2);
         inventory.addPart(part1);
         inventory.addPart(part2);
 

@@ -1,18 +1,18 @@
 package com.example.c482project;
 
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.function.Predicate;
+
+import static com.example.c482project.c482Project.inventory;
 
 public class inventoryManagementSystemController {
 
@@ -22,6 +22,8 @@ public class inventoryManagementSystemController {
     public Button partsAdd;
     public Button partsModify;
     public Button partsDelete;
+    public Button partSearchBtn;
+    public Button productSearchBtn;
     @FXML
     TableView<Product> productTableView = new TableView<>();
     @FXML
@@ -36,7 +38,8 @@ public class inventoryManagementSystemController {
     public Button productsAddBtn;
     public Button productsModifyBtn;
     public Button productsDeleteBtn;
-    public TextField partsTextfield;
+    @FXML
+    TextField partsTextfield;
     @FXML
     TableColumn<Part, String> partNameTableColumn = new TableColumn<>();
 
@@ -50,6 +53,9 @@ public class inventoryManagementSystemController {
 
     @FXML
     TableView<Part> partsTableView = new TableView<>();
+    private FilteredList<Product> productFilteredList = new FilteredList<>(inventory.getAllProducts());
+    private FilteredList<Part> partFilteredList = new FilteredList<>(inventory.getAllParts());
+
 
     @FXML
     private void onExitButtonClick() {
@@ -65,6 +71,30 @@ public class inventoryManagementSystemController {
     }
 
     public void onPartsDeleteClick(MouseEvent mouseEvent) {
+        InHouse part3 = new InHouse(3,"delete Test", 12.35, 2, 0, 12, 165);
+        inventory.addPart(part3);
+
+    }
+    private boolean searchFindsPart(Part part, String searchText){
+        return (part.getName().toString().toLowerCase().contains(searchText.toLowerCase())) ||
+                Integer.valueOf(part.getId()).toString().contains(searchText.toLowerCase());
+    }
+    private Predicate<Part> createPartPredicate(String searchText){
+        return part -> {
+            if (searchText == null || searchText.isEmpty()) return true;
+            return searchFindsPart(part, searchText);
+        };
+    }
+
+    private Predicate<Product> createProductPredicate(String searchText){
+        return product -> {
+            if (searchText == null || searchText.isEmpty()) return true;
+            return searchFindsProduct(product, searchText);
+        };
+    }
+    private boolean searchFindsProduct(Product product, String searchText){
+        return (product.getName().toString().toLowerCase().contains(searchText.toLowerCase())) ||
+                Integer.valueOf(product.getId()).toString().contains(searchText.toLowerCase());
     }
 
 
@@ -72,19 +102,28 @@ public class inventoryManagementSystemController {
 @FXML
    public void initialize() {
         //Initializing Product Table View
-        productTableView.setItems(c482Project.inventory.getAllProducts());
+        productTableView.setItems(productFilteredList);
         productIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInventoryLevelTableView.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPricePerUnitTableColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
        //Initialize Parts Table
-        partsTableView.setItems(c482Project.inventory.getAllParts());
+        partsTableView.setItems(partFilteredList);
         partIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryLevelTableColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPricePerUnitTableColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        //Initialize Search parts
+        partsTextfield.textProperty().addListener((observable, oldValue, newValue) ->
+            partFilteredList.setPredicate(createPartPredicate(newValue)));
+
+        //Initialize Search Products
+        productsTextField.textProperty().addListener((observable, oldValue, newValue) ->
+            productFilteredList.setPredicate(createProductPredicate(newValue)));
+
    }
+
 
 }
