@@ -21,6 +21,7 @@ public class  c482Project extends Application {
     private static Stage primaryStage;
     public static Inventory inventory = new Inventory();
     public static ObservableList<Product> allProducts = inventory.getAllProducts();
+    public static int partID = 3;
     @Override
     public void start(Stage stage) throws IOException {
 
