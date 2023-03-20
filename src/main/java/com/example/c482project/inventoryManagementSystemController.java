@@ -69,9 +69,7 @@ public class inventoryManagementSystemController {
     }
 
     public void onPartsDeleteClick(MouseEvent mouseEvent) {
-        InHouse part3 = new InHouse(3,"delete Test", 12.35, 2, 0, 12, 165);
-        inventory.addPart(part3);
-
+       inventory.deletePart(partsTableView.getFocusModel().getFocusedItem());
     }
     private boolean searchFindsPart(Part part, String searchText){
         return (part.getName().toString().toLowerCase().contains(searchText.toLowerCase())) ||
