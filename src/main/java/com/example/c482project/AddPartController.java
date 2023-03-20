@@ -15,8 +15,7 @@ public class AddPartController {
 
     public RadioButton outsourcedRadioBtn;
     public RadioButton inHouseRadioBtn;
-    //TODO Delete
-    public TextArea testTextArea;
+    public Text errorText;
     public TextField idTextField;
     public TextField nameTextField;
     public TextField invTextField;
@@ -45,19 +44,26 @@ public class AddPartController {
         double price = Double.parseDouble(price_costTextField.getText());
         int max = Integer.parseInt(maxTextField.getText());
         int min = Integer.parseInt(minTextField.getText());
-
-        //If outsourced selected add outsourced part else add inHouse part
-        if (outsourcedRadioBtn.isSelected()) {
-            String comName = machineID_CompanyNameLable.getText();
-            Outsourced outsourced = new Outsourced(partID, name, price, stock, min, max, comName);
-            inventory.addPart(outsourced);
+        errorText.setText("");
+        // check to see if stock is within min max bounds
+        if (stock < min || stock > max) {
+            errorText.setText("Please enter a an Inv number between Min and Max");
         } else {
-            int machineID = Integer.parseInt(machineID_CompanyNameTextField.getText());
-            InHouse inHouse = new InHouse(partID,name, price, stock, min, max, machineID);
-            inventory.addPart(inHouse);
+
+            //If outsourced selected add outsourced part else add inHouse part
+            if (outsourcedRadioBtn.isSelected()) {
+                String comName = machineID_CompanyNameLable.getText();
+                Outsourced outsourced = new Outsourced(partID, name, price, stock, min, max, comName);
+                inventory.addPart(outsourced);
+            } else {
+                int machineID = Integer.parseInt(machineID_CompanyNameTextField.getText());
+                InHouse inHouse = new InHouse(partID, name, price, stock, min, max, machineID);
+                inventory.addPart(inHouse);
+            }
+
+            partID += 1;
+            changeScene("inventory_management_system.fxml", "Inventory Management System", 1284, 517);
         }
-        partID += 1;
-        changeScene("inventory_management_system.fxml", "Inventory Management System", 1284,517 );
     }
 
     public void onInHouseRadioBtnClick(ActionEvent actionEvent) {

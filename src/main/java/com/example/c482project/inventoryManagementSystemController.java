@@ -22,8 +22,6 @@ public class inventoryManagementSystemController {
     public Button partsAdd;
     public Button partsModify;
     public Button partsDelete;
-    public Button partSearchBtn;
-    public Button productSearchBtn;
     @FXML
     TableView<Product> productTableView = new TableView<>();
     @FXML
