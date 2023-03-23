@@ -53,6 +53,7 @@ public class inventoryManagementSystemController {
     TableView<Part> partsTableView = new TableView<>();
     private FilteredList<Product> productFilteredList = new FilteredList<>(inventory.getAllProducts());
     private FilteredList<Part> partFilteredList = new FilteredList<>(inventory.getAllParts());
+    private static int modifyPartIndex = -1;
 
 
     @FXML
@@ -65,6 +66,8 @@ public class inventoryManagementSystemController {
     }
 
     public void onPartsModifyClick(MouseEvent mouseEvent) throws IOException {
+        ModifyPartController.setModifyPart(partsTableView.getFocusModel().getFocusedItem());
+        setModifyPartIndex(inventory.getAllParts().indexOf(partsTableView.getFocusModel().getFocusedItem()));
         c482Project.changeScene("modify_Part.fxml","Modify Part", 500, 600);
     }
 
@@ -72,7 +75,7 @@ public class inventoryManagementSystemController {
        inventory.deletePart(partsTableView.getFocusModel().getFocusedItem());
     }
     private boolean searchFindsPart(Part part, String searchText){
-        return (part.getName().toString().toLowerCase().contains(searchText.toLowerCase())) ||
+        return (part.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(part.getId()).toString().contains(searchText.toLowerCase());
     }
     private Predicate<Part> createPartPredicate(String searchText){
@@ -89,7 +92,7 @@ public class inventoryManagementSystemController {
         };
     }
     private boolean searchFindsProduct(Product product, String searchText){
-        return (product.getName().toString().toLowerCase().contains(searchText.toLowerCase())) ||
+        return (product.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(product.getId()).toString().contains(searchText.toLowerCase());
     }
 
@@ -120,6 +123,11 @@ public class inventoryManagementSystemController {
             productFilteredList.setPredicate(createProductPredicate(newValue)));
 
    }
-
+    public void setModifyPartIndex(int i) {
+        modifyPartIndex = i;
+    }
+    public static int getModifyPartIndex() {
+        return modifyPartIndex;
+    }
 
 }

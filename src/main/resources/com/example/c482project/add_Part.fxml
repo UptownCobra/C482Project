@@ -55,7 +55,7 @@
             <Label text="Inv" GridPane.rowIndex="2" />
             <Label text="Price/Cost" GridPane.rowIndex="3" />
             <Label text="Max" GridPane.rowIndex="4" />
-            <Label fx:id="machineID_CompanyNameLable" text="Machine ID" GridPane.rowIndex="5" />
+            <Label fx:id="machineID_CompanyNameLabel" text="Machine ID" GridPane.rowIndex="5" />
             <TextField fx:id="idTextField" disable="true" editable="false" promptText="Auto Gen - Disabled" GridPane.columnIndex="1" />
             <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="invTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -78,7 +78,7 @@
          </children>
       </GridPane>
       <Button fx:id="saveBtn" layoutX="280.0" layoutY="328.0" mnemonicParsing="false" onAction="#onSaveBtnClick" text="Save" />
-      <Button fx:id="cancelBtn" layoutX="341.0" layoutY="328.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="cancelBtn" layoutX="341.0" layoutY="328.0" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel" />
       <Text fx:id="errorText" fill="RED" layoutX="132.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>
