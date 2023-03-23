@@ -15,13 +15,14 @@ import java.io.IOException;
 import java.util.Objects;
 
 import static com.example.c482project.inventoryManagementSystemController.*;
-
+//TODO make a change scene class to remove redundant code
 public class  c482Project extends Application {
 
     private static Stage primaryStage;
     public static Inventory inventory = new Inventory();
     public static ObservableList<Product> allProducts = inventory.getAllProducts();
     public static int partID = 3;
+    public static int productID = 2;
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -33,8 +34,8 @@ public class  c482Project extends Application {
         stage.setScene(scene);
         stage.show();
         primaryStage = stage;
-        Product product1 = new Product(123, "test", 12.99,3,0,10);
-        Product product2 = new Product(124, "check", 12.99,3,0,10);
+        Product product1 = new Product(1, "test", 12.99,3,0,10);
+        Product product2 = new Product(2, "check", 12.99,3,0,10);
 
         InHouse part1 = new InHouse(1, "test1", 12.99,5, 0, 5, 2);
         Outsourced part2 = new Outsourced(2,"outsourced", 12.99, 3,0,13,"Test Company");

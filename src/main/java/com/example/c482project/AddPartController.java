@@ -11,6 +11,7 @@ import static com.example.c482project.c482Project.*;
 //TODO add redundancy to ensure fields are populated.
 //TODO convert Price to 2 decimal places for appearance
 //TODO combine addParts and modifyParts to reduce redundancy of code. Or make a separate class to include reused functions.
+//TODO •   The application will not crash when inappropriate user data is entered in the forms; instead, error messages should be generated.
 public class AddPartController {
 
     public RadioButton outsourcedRadioBtn;
@@ -28,7 +29,7 @@ public class AddPartController {
     public Label machineID_CompanyNameLabel;
 
     public void cancelButtonClicked() throws IOException {
-        c482Project.changeScene("inventory_Management_system.fxml","Inventory Management System", 1284, 517);
+        c482Project.changeScene("inventory_Management_system.fxml","Inventory Management System", 1284, 550);
     }
     public void onOutsourcedRadioBtnClicked(ActionEvent actionEvent) {
             machineID_CompanyNameLabel.setText("Company ID");
@@ -66,7 +67,7 @@ public class AddPartController {
             }
 
             partID += 1;
-            changeScene("inventory_management_system.fxml", "Inventory Management System", 1284, 517);
+            changeScene("inventory_management_system.fxml", "Inventory Management System", 1284, 550);
         }
     }
 

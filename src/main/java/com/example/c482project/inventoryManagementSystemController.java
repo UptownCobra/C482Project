@@ -61,6 +61,7 @@ public class inventoryManagementSystemController {
         Platform.exit();
     }
 
+    //Parts Modification Buttons
     public void onPartsAddClick(MouseEvent mouseEvent) throws IOException {
         c482Project.changeScene("add_Part.fxml","Add Part", 500, 600);
     }
@@ -74,6 +75,13 @@ public class inventoryManagementSystemController {
     public void onPartsDeleteClick(MouseEvent mouseEvent) {
        inventory.deletePart(partsTableView.getFocusModel().getFocusedItem());
     }
+
+    //Product Modification buttons
+    public void onProductAddClick() throws IOException {
+        c482Project.changeScene("add_Product.fxml", "Add Product", 1300,570);
+    }
+
+    //Search functions
     private boolean searchFindsPart(Part part, String searchText){
         return (part.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(part.getId()).toString().contains(searchText.toLowerCase());
