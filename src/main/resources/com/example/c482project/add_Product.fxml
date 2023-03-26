@@ -75,8 +75,8 @@
          </columns>
       </TableView>
       <Button fx:id="addBtn" layoutX="1065.0" layoutY="231.0" mnemonicParsing="false" onAction="#addBtnClick" text="Add" />
-      <Button fx:id="removeAssociatedPartBtn" layoutX="1018.0" layoutY="447.0" mnemonicParsing="false" text="Remove Associated Part" />
-      <Button fx:id="saveBtn" layoutX="1018.0" layoutY="491.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="removeAssociatedPartBtn" layoutX="1018.0" layoutY="447.0" mnemonicParsing="false" onAction="#removeAssociatedPartBtnClick" text="Remove Associated Part" />
+      <Button fx:id="saveBtn" layoutX="1018.0" layoutY="491.0" mnemonicParsing="false" onAction="#saveBtnClick" text="Save" />
       <Button fx:id="cancelBtn" layoutX="1110.0" layoutY="491.0" mnemonicParsing="false" onAction="#cancelBtnClick" text="Cancel" />
    </children>
 </AnchorPane>

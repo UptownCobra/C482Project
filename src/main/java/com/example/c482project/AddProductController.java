@@ -1,5 +1,6 @@
 package com.example.c482project;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.function.Predicate;
 
 import static com.example.c482project.c482Project.inventory;
+import static com.example.c482project.c482Project.productID;
 
 //TODO•   The user should not delete a product that has a part associated with it.
 //TODO The application auto-generates a unique product ID. The product IDs can be, but do not need to be, contiguous.
@@ -53,7 +55,7 @@ public class AddProductController {
     TableColumn<Part, Double> partPricePerUnitTableColumn = new TableColumn<>();
 
     @FXML
-    TableView<Part> associatedPartsTableView = new TableView<>();
+    TableView<Part> associatedPartTableView = new TableView<>();
     @FXML
     TableColumn<Part, String> associatedPartNameTableColumn = new TableColumn<>();
     @FXML
@@ -73,13 +75,21 @@ public class AddProductController {
     public void addBtnClick() {
         Part part = partsTableView.getFocusModel().getFocusedItem();
        newProduct.addAssociatedPart(part);
-       System.out.println(newProduct);
     }
 
     public void removeAssociatedPartBtnClick() {
+        newProduct.deleteAssociatedPart(associatedPartTableView.getFocusModel().getFocusedItem());
 
     }
-    public void saveBtnClick() {
+    public void saveBtnClick() throws IOException {
+        newProduct.setName(nameTextField.getText());
+        newProduct.setPrice(Double.parseDouble(price_costTextField.getText()));
+        newProduct.setMin(Integer.parseInt(minTextField.getText()));
+        newProduct.setMax(Integer.parseInt(maxTextField.getText()));
+        newProduct.setStock(Integer.parseInt(invTextField.getText()));
+        inventory.addProduct(newProduct);
+        productID += 1;
+        c482Project.changeScene("inventory_management_system.fxml", "Inventory Management System", 1300,550);
 
     }
     public void cancelBtnClick() throws IOException {
@@ -98,7 +108,8 @@ public class AddProductController {
     }
 
     public void initialize() {
-        newProduct = new Product(-1,null,-1,-1,-1,-1);
+
+        newProduct = new Product(productID,null,-1,-1,-1,-1);
         // Init top table
         partsTableView.setItems(partSearchFilteredList);
         partIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -107,7 +118,7 @@ public class AddProductController {
         partPricePerUnitTableColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         //TODO botom table not working
         // Init bottom table
-        associatedPartsTableView.setItems(newProduct.getAllAssociatedParts());
+        associatedPartTableView.setItems(newProduct.getAllAssociatedParts());
         associatedPartIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         associatedPartNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         associatedPartInventoryLevelTableColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
