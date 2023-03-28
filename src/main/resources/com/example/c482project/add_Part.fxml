@@ -79,6 +79,10 @@
       </GridPane>
       <Button fx:id="saveBtn" layoutX="280.0" layoutY="328.0" mnemonicParsing="false" onAction="#onSaveBtnClick" text="Save" />
       <Button fx:id="cancelBtn" layoutX="341.0" layoutY="328.0" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel" />
-      <Text fx:id="errorText" fill="RED" layoutX="132.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="errorTextMinMax" fill="RED" layoutX="132.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="errorTextInv" fill="RED" layoutX="289.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="errorTextName" fill="RED" layoutX="289.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="errorTextCost" fill="RED" layoutX="289.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="errorTextMachineID_CompanyName" fill="RED" layoutX="289.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

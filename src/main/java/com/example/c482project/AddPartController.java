@@ -6,6 +6,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.example.c482project.c482Project.*;
 //TODO add redundancy to ensure fields are populated.
@@ -27,6 +30,14 @@ public class AddPartController {
     public TextField machineID_CompanyNameTextField;
     public Button saveBtn;
     public Label machineID_CompanyNameLabel;
+    public Text errorTextMinMax;
+    public Text errorTextInv;
+    public Text errorTextName;
+    public Text errorTextCost;
+    public Text errorTextMachineID_CompanyName;
+
+    public List<Text> errorTextList = new ArrayList<>();
+
 
     public void cancelButtonClicked() throws IOException {
         c482Project.changeScene("inventory_Management_system.fxml","Inventory Management System", 1284, 550);
@@ -38,40 +49,41 @@ public class AddPartController {
 
     public void onSaveBtnClick(ActionEvent actionEvent) throws IOException {
 
-        String name = nameTextField.getText();
-        int stock = Integer.parseInt(invTextField.getText());
-        double price = Double.parseDouble(price_costTextField.getText());
-        int max = Integer.parseInt(maxTextField.getText());
-        int min = Integer.parseInt(minTextField.getText());
-        errorText.setText("");
-        // check to see if stock is within min max bounds
-        if (stock < min || stock > max) {
-            errorText.setText("Please enter a an Inv number between Min and Max");
-        } else if (min > max) {
-            errorText.setText("The Minimum value is higher than the Maximum value");
-        } else if (max < min) {
-            errorText.setText("The Maximum value is lower thant the Minimum value");
-        }
+        if (InputVerification.isTextFieldInputValid(nameTextField,invTextField,price_costTextField,maxTextField,minTextField)) {
 
-        else {
+            String name = nameTextField.getText();
+            int stock = Integer.parseInt(invTextField.getText());
+            double price = Double.parseDouble(price_costTextField.getText());
+            int max = Integer.parseInt(maxTextField.getText());
+            int min = Integer.parseInt(minTextField.getText());
 
-            //If outsourced selected add outsourced part else add inHouse part
-            if (outsourcedRadioBtn.isSelected()) {
-                String comName = machineID_CompanyNameLabel.getText();
-                Outsourced outsourced = new Outsourced(partID, name, price, stock, min, max, comName);
-                inventory.addPart(outsourced);
-            } else {
-                int machineID = Integer.parseInt(machineID_CompanyNameTextField.getText());
-                InHouse inHouse = new InHouse(partID, name, price, stock, min, max, machineID);
-                inventory.addPart(inHouse);
+            InputVerification.resetErrorText(errorTextList);
+            // check to see if stock is within min max bounds
+//        if (stock < min || stock > max) {
+//            errorText.setText("Please enter a an Inv number between Min and Max");
+            //TODO resolve issues with Input varification
+            if (/*InputVerification.isMinLessMax(min, max, errorTextMinMax) & */InputVerification.isStockBetween(min, max, stock, errorTextInv)) {
+                //If outsourced selected add outsourced part else add inHouse part
+                if (outsourcedRadioBtn.isSelected()) {
+                    String comName = machineID_CompanyNameLabel.getText();
+                    Outsourced outsourced = new Outsourced(partID, name, price, stock, min, max, comName);
+                    inventory.addPart(outsourced);
+                } else {
+                    int machineID = Integer.parseInt(machineID_CompanyNameTextField.getText());
+                    InHouse inHouse = new InHouse(partID, name, price, stock, min, max, machineID);
+                    inventory.addPart(inHouse);
+                }
+
+                partID += 1;
+                changeScene("inventory_management_system.fxml", "Inventory Management System", 1284, 550);
             }
-
-            partID += 1;
-            changeScene("inventory_management_system.fxml", "Inventory Management System", 1284, 550);
         }
     }
 
     public void onInHouseRadioBtnClick(ActionEvent actionEvent) {
         machineID_CompanyNameLabel.setText("Machine ID");
+    }
+    public void initialize() {
+        errorTextList.addAll(Arrays.asList(errorTextMinMax,errorTextInv,errorTextCost,errorTextName,errorTextMachineID_CompanyName));
     }
 }
