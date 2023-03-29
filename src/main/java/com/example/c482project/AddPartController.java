@@ -42,12 +42,12 @@ public class AddPartController {
     public void cancelButtonClicked() throws IOException {
         c482Project.changeScene("inventory_Management_system.fxml","Inventory Management System", 1284, 550);
     }
-    public void onOutsourcedRadioBtnClicked(ActionEvent actionEvent) {
-            machineID_CompanyNameLabel.setText("Company ID");
+    public void onOutsourcedRadioBtnClicked() {
+            machineID_CompanyNameLabel.setText("Company Name");
     }
 
 
-    public void onSaveBtnClick(ActionEvent actionEvent) throws IOException {
+    public void onSaveBtnClick() throws IOException {
         String comName = "";
         int machineID = -1;
 
