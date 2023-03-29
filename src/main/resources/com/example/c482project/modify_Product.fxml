@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.c482project.ModifyProductController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="550.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.c482project.ModifyProductController">
+    <children>
+        <Text layoutX="84.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Text>
+        <TextField fx:id="productSearchTextField" layoutX="1009.0" layoutY="13.0" promptText="Search by Part ID or Name" />
+        <GridPane layoutX="60.0" layoutY="124.0" prefHeight="180.0" prefWidth="209.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="80.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="129.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="ID" />
+                <Label text="Name" GridPane.rowIndex="1" />
+                <Label text="Inv" GridPane.rowIndex="2" />
+                <Label text="Price/Cost" GridPane.rowIndex="3" />
+                <Label text="Max" GridPane.rowIndex="4" />
+                <TextField fx:id="idTextField" disable="true" editable="false" promptText="Auto Gen - Disabled" GridPane.columnIndex="1" />
+                <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="invTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="price_costTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="maxTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            </children>
+        </GridPane>
+        <GridPane layoutX="287.0" layoutY="274.0" prefHeight="30.0" prefWidth="173.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="48.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="125.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Min" />
+                <TextField fx:id="minTextField" prefWidth="116.0" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+        <TableView fx:id="partsTableView" layoutX="619.0" layoutY="42.0" prefHeight="180.0" prefWidth="543.0">
+            <columns>
+                <TableColumn fx:id="partIDTableColumn" prefWidth="91.0" text="Part IDs" />
+                <TableColumn fx:id="partNameTableColumn" prefWidth="155.0" text="Part Name" />
+                <TableColumn fx:id="partInventoryLevelTableColumn" prefWidth="106.0" text="Inventory Level" />
+                <TableColumn fx:id="partPricePerUnitTableColumn" prefWidth="190.0" text="Price/Cost per Unit" />
+            </columns>
+        </TableView>
+        <TableView fx:id="associatedPartTableView" layoutX="619.0" layoutY="259.0" prefHeight="180.0" prefWidth="543.0">
+            <columns>
+                <TableColumn fx:id="associatedPartIDTableColumn" prefWidth="91.0" text="Part IDs" />
+                <TableColumn fx:id="associatedPartNameTableColumn" prefWidth="155.0" text="Part Name" />
+                <TableColumn fx:id="associatedPartInventoryLevelTableColumn" prefWidth="106.0" text="Inventory Level" />
+                <TableColumn fx:id="associatedPartPricePerUnitTableColumn" prefWidth="190.0" text="Price/Cost per Unit" />
+            </columns>
+        </TableView>
+        <Button fx:id="addBtn" layoutX="1065.0" layoutY="231.0" mnemonicParsing="false" onAction="#addBtnClick" text="Add" />
+        <Button fx:id="removeAssociatedPartBtn" layoutX="1018.0" layoutY="447.0" mnemonicParsing="false" onAction="#removeAssociatedPartBtnClick" text="Remove Associated Part" />
+        <Button fx:id="saveBtn" layoutX="1018.0" layoutY="491.0" mnemonicParsing="false" onAction="#saveBtnClick" text="Save" />
+        <Button fx:id="cancelBtn" layoutX="1110.0" layoutY="491.0" mnemonicParsing="false" onAction="#cancelBtnClick" text="Cancel" />
+        <Text fx:id="nameErrorText" fill="RED" layoutX="287.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+        <Text fx:id="invErrorText" fill="RED" layoutX="287.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+        <Text fx:id="priceErrorText" fill="RED" layoutX="287.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+        <Text fx:id="minMaxErrorText" fill="RED" layoutX="154.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+    </children>
 </AnchorPane>

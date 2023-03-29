@@ -53,7 +53,9 @@ public class inventoryManagementSystemController {
     TableView<Part> partsTableView = new TableView<>();
     private FilteredList<Product> productFilteredList = new FilteredList<>(inventory.getAllProducts());
     private FilteredList<Part> partFilteredList = new FilteredList<>(inventory.getAllParts());
-    private static int modifyPartIndex = -1;
+    private static int modifyPartIndex;
+    private static int modifyProductIndex;
+
 
 
     @FXML
@@ -77,8 +79,23 @@ public class inventoryManagementSystemController {
     }
 
     //Product Modification buttons
+    public void onProductModifyClick() throws IOException {
+        ModifyProductController.setModifyProduct(productTableView.getFocusModel().getFocusedItem());
+        setModifyProductIndex(inventory.getAllProducts().indexOf(productTableView.getFocusModel().getFocusedItem()));
+        System.out.println(getModifyProductIndex());
+        c482Project.changeScene("modify_Product.fxml", "Modify Product", 1300,570);
+
+    }
     public void onProductAddClick() throws IOException {
         c482Project.changeScene("add_Product.fxml", "Add Product", 1300,570);
+    }
+    public void onProductDeleteClick() {
+        Product product = productTableView.getFocusModel().getFocusedItem();
+        if (product.getAllAssociatedParts().isEmpty()){
+            inventory.deleteProduct(product);
+        } else{
+            //TODO throw error here.
+        }
     }
 
     //Search functions
@@ -129,7 +146,8 @@ public class inventoryManagementSystemController {
         //Initialize Search Products
         productsTextField.textProperty().addListener((observable, oldValue, newValue) ->
             productFilteredList.setPredicate(createProductPredicate(newValue)));
-
+    setModifyPartIndex(-1);
+    setModifyProductIndex(-1);
    }
     public void setModifyPartIndex(int i) {
         modifyPartIndex = i;
@@ -137,5 +155,6 @@ public class inventoryManagementSystemController {
     public static int getModifyPartIndex() {
         return modifyPartIndex;
     }
-
+    public void setModifyProductIndex(int i) {modifyProductIndex = i;}
+    public static int getModifyProductIndex() {return modifyProductIndex;}
 }

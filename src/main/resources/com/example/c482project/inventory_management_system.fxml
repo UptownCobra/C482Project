@@ -50,8 +50,8 @@
             </TableView>
             <TextField fx:id="productsTextField" layoutX="361.0" layoutY="25.0" prefHeight="25.0" prefWidth="199.0" promptText="Search by Product ID or Name" />
             <Button fx:id="productsAddBtn" layoutX="390.0" layoutY="297.0" mnemonicParsing="false" onAction="#onProductAddClick" text="Add" />
-            <Button fx:id="productsModifyBtn" layoutX="434.0" layoutY="297.0" mnemonicParsing="false" text="Modify" />
-            <Button fx:id="productsDeleteBtn" layoutX="493.0" layoutY="297.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="productsModifyBtn" layoutX="434.0" layoutY="297.0" mnemonicParsing="false" onAction="#onProductModifyClick" text="Modify" />
+            <Button fx:id="productsDeleteBtn" layoutX="493.0" layoutY="297.0" mnemonicParsing="false" onAction="#onProductDeleteClick" text="Delete" />
             <Text layoutX="34.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products">
                <font>
                   <Font name="System Bold" size="18.0" />
