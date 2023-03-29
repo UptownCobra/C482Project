@@ -48,8 +48,21 @@ public class AddPartController {
 
 
     public void onSaveBtnClick(ActionEvent actionEvent) throws IOException {
+        String comName = "";
+        int machineID = -1;
 
-        if (InputVerification.isTextFieldInputValid(nameTextField,invTextField,price_costTextField,maxTextField,minTextField)) {
+        if (outsourcedRadioBtn.isSelected()) {
+            if (InputVerification.isTextFieldString(machineID_CompanyNameTextField, errorTextMachineID_CompanyName, "Company Name")) {
+                comName = machineID_CompanyNameLabel.getText();
+            }
+        }else {
+            if (InputVerification.isTextFieldInt(machineID_CompanyNameTextField, errorTextMachineID_CompanyName, "Machine ID")) {
+                machineID = Integer.parseInt(machineID_CompanyNameTextField.getText());
+            }
+        }
+
+
+        if (InputVerification.isTextFieldInputValid(nameTextField,invTextField,price_costTextField,maxTextField,minTextField, errorTextName, errorTextInv,errorTextCost,errorTextMinMax)) {
 
             String name = nameTextField.getText();
             int stock = Integer.parseInt(invTextField.getText());
@@ -58,26 +71,23 @@ public class AddPartController {
             int min = Integer.parseInt(minTextField.getText());
 
             InputVerification.resetErrorText(errorTextList);
-            // check to see if stock is within min max bounds
-//        if (stock < min || stock > max) {
-//            errorText.setText("Please enter a an Inv number between Min and Max");
+            ;
             //TODO resolve issues with Input varification
-            if (/*InputVerification.isMinLessMax(min, max, errorTextMinMax) & */InputVerification.isStockBetween(min, max, stock, errorTextInv)) {
-                //If outsourced selected add outsourced part else add inHouse part
+            if (InputVerification.isMinLessMax(min, max, errorTextMinMax) & InputVerification.isStockBetween(min, max, stock, errorTextInv)) {
                 if (outsourcedRadioBtn.isSelected()) {
-                    String comName = machineID_CompanyNameLabel.getText();
                     Outsourced outsourced = new Outsourced(partID, name, price, stock, min, max, comName);
                     inventory.addPart(outsourced);
-                } else {
-                    int machineID = Integer.parseInt(machineID_CompanyNameTextField.getText());
-                    InHouse inHouse = new InHouse(partID, name, price, stock, min, max, machineID);
-                    inventory.addPart(inHouse);
                 }
-
-                partID += 1;
-                changeScene("inventory_management_system.fxml", "Inventory Management System", 1284, 550);
+            } else {
+                InHouse inHouse = new InHouse(partID, name, price, stock, min, max, machineID);
+                inventory.addPart(inHouse);
             }
+
+
+            partID += 1;
+            changeScene("inventory_management_system.fxml", "Inventory Management System", 1284, 550);
         }
+
     }
 
     public void onInHouseRadioBtnClick(ActionEvent actionEvent) {

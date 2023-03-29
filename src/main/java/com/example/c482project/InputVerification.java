@@ -8,42 +8,18 @@ import java.util.Arrays;
 import java.util.List;
 //TODO finish class
 //TODO determine if this class should be initialized or just have values passed.
-public abstract class InputVerification {
-    private TextField nameTextField;
-    private TextField invTextField;
-    private TextField priceTextField;
-    private TextField minTextField;
-    private TextField maxTextField;
-    private Text nameText;
-    private Text invText;
-    private Text priceText;
-    private Text minText;
-    private Text maxText;
-    private List<Text> errorTextList = new ArrayList<>();
+public class InputVerification {
 
-    public InputVerification(TextField nameTF, TextField invTF, TextField priceTF, TextField minTF, TextField maxTF, Text nameT, Text invT, Text priceT, Text minT, Text maxT) {
-        this.nameTextField = nameTF;
-        this.invTextField = invTF;
-        this.priceTextField = priceTF;
-        this.minTextField = minTF;
-        this.maxTextField = maxTF;
-        this.nameText = nameT;
-        this.invText = invT;
-        this.priceText = priceT;
-        this.minText = minT;
-        this.maxText = maxT;
-        this.errorTextList.addAll(Arrays.asList(this.nameText,this.invText,this.priceText,this.minText,this.maxText));
+    public static boolean isMinLessMax(int min, int max, Text errorText) {
+        if (min > max) {
+            errorText.setText("Min value must be less that Max value");
+            return false;
+        } else {
+            return true;
+        }
     }
 
-  /*  public static boolean isMinLessMax() {
-     if (getInt(minTextField) > max) {
-         errorText.setText("Min value must be less that Max value");
-         return false;
-     } else {
-         return true;
-     }
-    }*/
-    public static boolean isStockBetween(int min,int max, int stock, Text errorText) {
+    public static boolean isStockBetween(int min, int max, int stock, Text errorText) {
         if (stock >= min && stock <= max) {
             return true;
         } else {
@@ -51,25 +27,74 @@ public abstract class InputVerification {
             return false;
         }
     }
+
     public static void resetErrorText(List<Text> errorTextList) {
         for (Text text : errorTextList) {
             text.setText("");
         }
     }
-    public static boolean isTextFieldInputValid(TextField name, TextField inv, TextField price, TextField max, TextField min) {
+
+    public static boolean isTextFieldInputValid(TextField name, TextField inv, TextField price, TextField max, TextField min, Text nameErrorText, Text invErrorText, Text priceErrorText, Text minMaxErrorText) {
         boolean isValid = true;
         try {
             int i = Integer.parseInt(name.getText());
-            name.setText("Name Field cannot be Int");
+            nameErrorText.setText("Name Field cannot be Int");
             isValid = false;
         } catch (Exception e) {
-            name.clear();
-
+            nameErrorText.setText("");
         }
+        try {
+            int i = Integer.parseInt(inv.getText());
+            invErrorText.setText("");
+        } catch (Exception e) {
+            invErrorText.setText("Inv must be an Integer");
+            isValid = false;
+        }
+        try {
+            double i = Double.parseDouble(price.getText());
+            priceErrorText.setText("");
+        } catch (Exception e){
+            priceErrorText.setText("Price/Cost must be a decimal");
+            isValid = false;
+        }
+        try {
+            int i = Integer.parseInt(max.getText());
+            minMaxErrorText.setText("");
+        } catch (Exception e) {
+            minMaxErrorText.setText("Max must be an Integer");
+            isValid = false;
+        }
+        try {
+            int i = Integer.parseInt(min.getText());
+            minMaxErrorText.setText("");
+        } catch (Exception e) {
+            minMaxErrorText.setText("Min must be an Integer");
+            isValid = false;
+        }
+
         return isValid;
     }
 
-    private static int getInt(TextField tf) {
-        return Integer.parseInt(tf.getText());
+    public static boolean isTextFieldInt(TextField tf, Text errorText, String fieldName) {
+        try {
+            int i = Integer.parseInt(tf.getText());
+            errorText.setText("");
+            return true;
+        } catch (Exception e) {
+            errorText.setText(fieldName + " must be an Integer");
+            return false;
+        }
     }
+
+    public static boolean isTextFieldString(TextField tf, Text errorText, String fieldName) {
+        try {
+            int i = Integer.parseInt(tf.getText());
+            errorText.setText(fieldName + " must be a String");
+            return true;
+        } catch (Exception e) {
+            errorText.setText("");
+            return false;
+        }
+    }
+
 }
