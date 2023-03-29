@@ -45,7 +45,7 @@
             <TextField fx:id="maxTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <GridPane layoutX="290.0" layoutY="244.0" prefHeight="30.0" prefWidth="173.0">
+      <GridPane layoutX="287.0" layoutY="274.0" prefHeight="30.0" prefWidth="173.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="48.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="125.0" />
@@ -78,5 +78,9 @@
       <Button fx:id="removeAssociatedPartBtn" layoutX="1018.0" layoutY="447.0" mnemonicParsing="false" onAction="#removeAssociatedPartBtnClick" text="Remove Associated Part" />
       <Button fx:id="saveBtn" layoutX="1018.0" layoutY="491.0" mnemonicParsing="false" onAction="#saveBtnClick" text="Save" />
       <Button fx:id="cancelBtn" layoutX="1110.0" layoutY="491.0" mnemonicParsing="false" onAction="#cancelBtnClick" text="Cancel" />
+      <Text fx:id="nameErrorText" fill="RED" layoutX="287.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="invErrorText" fill="RED" layoutX="287.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="priceErrorText" fill="RED" layoutX="287.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="minMaxErrorText" fill="RED" layoutX="154.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

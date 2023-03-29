@@ -8,33 +8,19 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import static com.example.c482project.c482Project.inventory;
 import static com.example.c482project.c482Project.productID;
 
 //TODO•   The user should not delete a product that has a part associated with it.
-//TODO The application auto-generates a unique product ID. The product IDs can be, but do not need to be, contiguous.
-//
-// TODO The product ID text field must be disabled and cannot be edited or changed.
-//
-//TODO   The user should be able to enter a product name, inventory level or stock, a price, and maximum and minimum values.
-//
-//TODO   The user can search for parts (top table) by ID or name (partial or full name). If the part or parts are found, the application highlights a single part or filters multiple parts. If the part or parts are not found, the application displays an error message in the UI or in a dialog box.
-//
-//TODO   If the search field is set to empty, the table should be repopulated with all available parts.
-//
-//TODO   The top table should be identical to the Parts TableView in the Main form.
-//
-//TODO   The user can select a part from the top table. The user then clicks the Add button, and the part is copied to the bottom table. (This associates one or more parts with a product.)
-//
-//TODO   The Remove Associated Part button removes a selected part from the bottom table. (This dissociates or removes a part from a product.)
-//
-//TODO   After saving the data, the user is automatically redirected to the Main form.
-//
-//TODO   Canceling or exiting this form redirects users to the Main form.
+
 public class AddProductController {
     public TextField productSearchTextField;
     public TextField idTextField;
@@ -43,6 +29,13 @@ public class AddProductController {
     public TextField price_costTextField;
     public TextField maxTextField;
     public TextField minTextField;
+    public Text nameErrorText;
+    public Text invErrorText;
+    public Text priceErrorText;
+    public Text minMaxErrorText;
+
+    public List<Text> errorTextList = new ArrayList<>();
+
     @FXML
     TableView<Part> partsTableView = new TableView<>();
     @FXML
@@ -82,15 +75,28 @@ public class AddProductController {
 
     }
     public void saveBtnClick() throws IOException {
-        newProduct.setName(nameTextField.getText());
-        newProduct.setPrice(Double.parseDouble(price_costTextField.getText()));
-        newProduct.setMin(Integer.parseInt(minTextField.getText()));
-        newProduct.setMax(Integer.parseInt(maxTextField.getText()));
-        newProduct.setStock(Integer.parseInt(invTextField.getText()));
-        inventory.addProduct(newProduct);
-        productID += 1;
-        c482Project.changeScene("inventory_management_system.fxml", "Inventory Management System", 1300,550);
+        InputVerification.resetErrorText(errorTextList);
+        if (InputVerification.isTextFieldInputValid(nameTextField,invTextField,price_costTextField,maxTextField,minTextField,nameErrorText,invErrorText,priceErrorText,minMaxErrorText)) {
 
+            String name = nameTextField.getText();
+            double price = Double.parseDouble(price_costTextField.getText());
+            int min = Integer.parseInt(minTextField.getText());
+            int max = Integer.parseInt(maxTextField.getText());
+            int inv = Integer.parseInt(invTextField.getText());
+
+            if (InputVerification.isMinLessMax(min, max, minMaxErrorText) & InputVerification.isStockBetween(min, max, inv, invErrorText)) {
+                newProduct.setName(name);
+                newProduct.setPrice(price);
+                newProduct.setMin(min);
+                newProduct.setMax(max);
+                newProduct.setStock(inv);
+                inventory.addProduct(newProduct);
+                productID += 1;
+                c482Project.changeScene("inventory_management_system.fxml", "Inventory Management System", 1300, 550);
+            }
+
+
+        }
     }
     public void cancelBtnClick() throws IOException {
         c482Project.changeScene("inventory_management_system.fxml", "Inventory Management System", 1300,550);
@@ -108,6 +114,8 @@ public class AddProductController {
     }
 
     public void initialize() {
+        errorTextList.addAll(Arrays.asList(nameErrorText,invErrorText,priceErrorText,minMaxErrorText));
+
 
         newProduct = new Product(productID,null,-1,-1,-1,-1);
         // Init top table
@@ -116,7 +124,6 @@ public class AddProductController {
         partNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryLevelTableColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPricePerUnitTableColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        //TODO botom table not working
         // Init bottom table
         associatedPartTableView.setItems(newProduct.getAllAssociatedParts());
         associatedPartIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
