@@ -2,18 +2,15 @@ package com.example.c482project;
 
 import javafx.application.Platform;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.function.Predicate;
 
-import static com.example.c482project.c482Project.inventory;
+import static com.example.c482project.c482Project.*;
 
 public class inventoryManagementSystemController {
 
@@ -67,18 +64,23 @@ public class inventoryManagementSystemController {
     }
 
     //Parts Modification Buttons
-    public void onPartsAddClick(MouseEvent mouseEvent) throws IOException {
+    public void onPartsAddClick() throws IOException {
         c482Project.changeScene("add_Part.fxml","Add Part", 500, 600);
     }
 
-    public void onPartsModifyClick(MouseEvent mouseEvent) throws IOException {
+    public void onPartsModifyClick() throws IOException {
         ModifyPartController.setModifyPart(partsTableView.getFocusModel().getFocusedItem());
         setModifyPartIndex(inventory.getAllParts().indexOf(partsTableView.getFocusModel().getFocusedItem()));
         c482Project.changeScene("modify_Part.fxml","Modify Part", 500, 600);
     }
 
-    public void onPartsDeleteClick(MouseEvent mouseEvent) {
-       inventory.deletePart(partsTableView.getFocusModel().getFocusedItem());
+    public void onPartsDeleteClick() {
+        confirmPopup.showAndWait();
+
+        if (confirmDelete) {
+            inventory.deletePart(partsTableView.getFocusModel().getFocusedItem());
+            confirmDelete = false;
+        }
     }
 
     //Product Modification buttons
@@ -93,11 +95,14 @@ public class inventoryManagementSystemController {
         c482Project.changeScene("add_Product.fxml", "Add Product", 1300,570);
     }
     public void onProductDeleteClick() {
-        Product product = productTableView.getFocusModel().getFocusedItem();
-        if (product.getAllAssociatedParts().isEmpty()){
-            inventory.deleteProduct(product);
-        } else{
-            c482Project.showPopup();
+        confirmPopup.showAndWait();
+        if(confirmDelete) {
+            Product product = productTableView.getFocusModel().getFocusedItem();
+            if (product.getAllAssociatedParts().isEmpty()) {
+                inventory.deleteProduct(product);
+            } else {
+                c482Project.showPopup();
+            }
         }
     }
 

@@ -1,31 +1,26 @@
 package com.example.c482project;
 
 import javafx.application.Application;
-import javafx.beans.property.IntegerProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 
 import java.io.IOException;
 import java.util.Objects;
 
-import static com.example.c482project.inventoryManagementSystemController.*;
 //TODO make a change scene class to remove redundant code
 public class  c482Project extends Application {
 
     private static Stage primaryStage;
     public static Stage popup;
+    public static Stage confirmPopup;
     public static Inventory inventory = new Inventory();
-    public static ObservableList<Product> allProducts = inventory.getAllProducts();
     public static int partID = 3;
-    public static int productID = 2;
+    public static int productID = 3;
+    public static boolean confirmDelete = false;
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -44,11 +39,28 @@ public class  c482Project extends Application {
         popup.setScene(popupScene);
         popup.setTitle("Product Error");
         primaryStage = stage;
-        Product product1 = new Product(1, "test", 12.99,3,0,10);
-        Product product2 = new Product(2, "check", 12.99,3,0,10);
 
-        InHouse part1 = new InHouse(1, "test1", 12.99,5, 0, 5, 2);
-        Outsourced part2 = new Outsourced(2,"outsourced", 12.99, 3,0,13,"Test Company");
+        //Initialize ConfirmDeletePopup
+        FXMLLoader confirmDeletePopupFXMLLoader = new FXMLLoader(getClass().getResource("confirmDeletePopup.fxml"));
+        Scene confirmDeletePopupScene = new Scene(confirmDeletePopupFXMLLoader.load());
+        confirmPopup = new Stage();
+        confirmPopup.setScene(confirmDeletePopupScene);
+        confirmPopup.setTitle("Confirm Delete");
+
+
+        //Initialize dummy data
+        InHouse part1 = new InHouse(1, "Tire", 249.98,5, 0, 15, 2);
+        Outsourced part2 = new Outsourced(2,"Wing", 12349.99, 3,0,13,"Boing");
+
+        Product product1 = new Product(1, "Car", 12000.00,3,0,10);
+        product1.addAssociatedPart(part1);
+        product1.addAssociatedPart(part1);
+        product1.addAssociatedPart(part1);
+        product1.addAssociatedPart(part1);
+        Product product2 = new Product(2, "Plane", 120000.00,74,0,100);
+        product2.addAssociatedPart(part2);
+        product2.addAssociatedPart(part2);
+
 
         inventory.addProduct(product1);
         inventory.addProduct(product2);

@@ -1,12 +1,10 @@
 package com.example.c482project;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -20,7 +18,6 @@ public class ModifyPartController {
 
     public RadioButton outsourcedRadioBtn;
     public RadioButton inHouseRadioBtn;
-    public Text errorText;
     public TextField idTextField;
     public TextField nameTextField;
     public TextField invTextField;
@@ -50,7 +47,7 @@ public class ModifyPartController {
     }
 
 @FXML
-    public void onSaveBtnClick(ActionEvent actionEvent) throws IOException {
+    public void onSaveBtnClick() throws IOException {
 
     String comName = "";
     int machineID = -1;
@@ -88,14 +85,11 @@ public class ModifyPartController {
     }
 }
 
-    public void onInHouseRadioBtnClick(ActionEvent actionEvent) {
+    public void onInHouseRadioBtnClick() {
         machineID_CompanyNameLabel.setText("Machine ID");
     }
     public static void setModifyPart(Part part){
         modifyPart = part;
-    }
-    public Part getModifyPart(){
-        return modifyPart;
     }
     @FXML
     public void initialize() {
@@ -107,12 +101,10 @@ public class ModifyPartController {
         minTextField.setText(String.valueOf(modifyPart.getMin()));
         if (modifyPart instanceof Outsourced) {
             outsourcedRadioBtn.setSelected(true);
-            inHouseRadioBtn.setDisable(true);
             machineID_CompanyNameLabel.setText("Company Name");
             machineID_CompanyNameTextField.setText(((Outsourced) modifyPart).companyName);
         } else {
             inHouseRadioBtn.setSelected(true);
-            outsourcedRadioBtn.setDisable(true);
             machineID_CompanyNameLabel.setText("Machine ID");
             machineID_CompanyNameTextField.setText(String.valueOf(((InHouse) modifyPart).machineId));
         }

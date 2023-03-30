@@ -1,6 +1,5 @@
 package com.example.c482project;
 
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,10 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static com.example.c482project.c482Project.inventory;
-import static com.example.c482project.c482Project.productID;
+import static com.example.c482project.c482Project.*;
 
-//TODO•   The user should not delete a product that has a part associated with it.
 
 public class ModifyProductController {
     public TextField productSearchTextField;
@@ -72,8 +69,10 @@ public class ModifyProductController {
     }
 
     public void removeAssociatedPartBtnClick() {
-        modifyProduct.deleteAssociatedPart(associatedPartTableView.getFocusModel().getFocusedItem());
-
+        confirmPopup.showAndWait();
+        if (confirmDelete) {
+            modifyProduct.deleteAssociatedPart(associatedPartTableView.getFocusModel().getFocusedItem());
+        }
     }
     public void saveBtnClick() throws IOException {
         InputVerification.resetErrorText(errorTextList);
