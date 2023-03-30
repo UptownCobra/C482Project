@@ -35,6 +35,7 @@ public class ModifyProductController {
     public Text minMaxErrorText;
 
     public List<Text> errorTextList = new ArrayList<>();
+    public Text partsListErrorText;
 
     @FXML
     TableView<Part> partsTableView = new TableView<>();
@@ -114,6 +115,13 @@ public class ModifyProductController {
 
     public static void setModifyProduct(Product product) {
         modifyProduct = product;
+    }
+    public void checkPartsList() {
+        if (partSearchFilteredList.isEmpty()) {
+            partsListErrorText.setText("Search did not find any parts");
+        } else {
+            partsListErrorText.setText("");
+        }
     }
     public void initialize() {
         errorTextList.addAll(Arrays.asList(nameErrorText,invErrorText,priceErrorText,minMaxErrorText));

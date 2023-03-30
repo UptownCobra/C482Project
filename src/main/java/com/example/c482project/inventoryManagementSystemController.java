@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.function.Predicate;
@@ -22,6 +23,8 @@ public class inventoryManagementSystemController {
     public Button partsAdd;
     public Button partsModify;
     public Button partsDelete;
+    public Text partSearchErrorText;
+    public Text productSearchErrorText;
     @FXML
     TableView<Product> productTableView = new TableView<>();
     @FXML
@@ -117,6 +120,7 @@ public class inventoryManagementSystemController {
         };
     }
     private boolean searchFindsProduct(Product product, String searchText){
+
         return (product.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(product.getId()).toString().contains(searchText.toLowerCase());
     }
@@ -143,6 +147,8 @@ public class inventoryManagementSystemController {
         partsTextfield.textProperty().addListener((observable, oldValue, newValue) ->
             partFilteredList.setPredicate(createPartPredicate(newValue)));
 
+
+
         //Initialize Search Products
         productsTextField.textProperty().addListener((observable, oldValue, newValue) ->
             productFilteredList.setPredicate(createProductPredicate(newValue)));
@@ -157,4 +163,23 @@ public class inventoryManagementSystemController {
     }
     public void setModifyProductIndex(int i) {modifyProductIndex = i;}
     public static int getModifyProductIndex() {return modifyProductIndex;}
+    private void setSearchErrorText(Text errorText, String s){
+        errorText.setText("Search did not return any " + s);
+    }
+
+    public void checkPartsList() {
+        if (partFilteredList.isEmpty()) {
+            setSearchErrorText(partSearchErrorText, "parts");
+        } else {
+            partSearchErrorText.setText("");
+        }
+    }
+
+    public void checkProductList() {
+        if (productFilteredList.isEmpty()) {
+            setSearchErrorText(productSearchErrorText, "products");
+        } else {
+            productSearchErrorText.setText("");
+        }
+    }
 }

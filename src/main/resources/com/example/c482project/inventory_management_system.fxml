@@ -22,7 +22,7 @@
                   <TableColumn fx:id="partPricePerUnitTableColumn" prefWidth="190.0" text="Price/Cost per Unit" />
               </columns>
             </TableView>
-            <TextField fx:id="partsTextfield" layoutX="377.0" layoutY="25.0" prefHeight="25.0" prefWidth="180.0" promptText="Search by Part ID or Name" />
+            <TextField fx:id="partsTextfield" layoutX="377.0" layoutY="25.0" onAction="#checkPartsList" onKeyTyped="#checkPartsList" prefHeight="25.0" prefWidth="180.0" promptText="Search by Part ID or Name" />
             <Button fx:id="partsAdd" layoutX="390.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#onPartsAddClick" text="Add" />
             <Button fx:id="partsModify" layoutX="434.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#onPartsModifyClick" text="Modify" />
             <Button fx:id="partsDelete" layoutX="493.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#onPartsDeleteClick" text="Delete" />
@@ -31,6 +31,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
+            <Text fx:id="partSearchErrorText" fill="RED" layoutX="196.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </Pane>
       <Text layoutX="68.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory Management System">
@@ -48,7 +49,7 @@
                   <TableColumn fx:id="productPricePerUnitTableColumn" prefWidth="192.0" text="Price/Cost per Unit" />
                </columns>
             </TableView>
-            <TextField fx:id="productsTextField" layoutX="361.0" layoutY="25.0" prefHeight="25.0" prefWidth="199.0" promptText="Search by Product ID or Name" />
+            <TextField fx:id="productsTextField" layoutX="361.0" layoutY="25.0" onKeyTyped="#checkProductList" prefHeight="25.0" prefWidth="199.0" promptText="Search by Product ID or Name" />
             <Button fx:id="productsAddBtn" layoutX="390.0" layoutY="297.0" mnemonicParsing="false" onAction="#onProductAddClick" text="Add" />
             <Button fx:id="productsModifyBtn" layoutX="434.0" layoutY="297.0" mnemonicParsing="false" onAction="#onProductModifyClick" text="Modify" />
             <Button fx:id="productsDeleteBtn" layoutX="493.0" layoutY="297.0" mnemonicParsing="false" onAction="#onProductDeleteClick" text="Delete" />
@@ -57,6 +58,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
+            <Text fx:id="productSearchErrorText" fill="RED" layoutX="134.0" layoutY="42.0" onKeyTyped="#checkProductList" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="226.33331298828125" />
          </children>
       </Pane>
    </children>

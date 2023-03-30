@@ -35,6 +35,7 @@ public class AddProductController {
     public Text minMaxErrorText;
 
     public List<Text> errorTextList = new ArrayList<>();
+    public Text partsListErrorText;
 
     @FXML
     TableView<Part> partsTableView = new TableView<>();
@@ -111,6 +112,13 @@ public class AddProductController {
             if (searchText == null || searchText.isEmpty()) return true;
             return searchFindsPart(part, searchText);
         };
+    }
+    public void checkPartsList() {
+        if (partSearchFilteredList.isEmpty()) {
+            partsListErrorText.setText("Search did not find any parts");
+        } else {
+            partsListErrorText.setText("");
+        }
     }
 
     public void initialize() {
