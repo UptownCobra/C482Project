@@ -94,4 +94,5 @@ public class AddPartController {
     public void initialize() {
         errorTextList.addAll(Arrays.asList(errorTextMinMax,errorTextInv,errorTextCost,errorTextName,errorTextMachineID_CompanyName));
     }
+
 }

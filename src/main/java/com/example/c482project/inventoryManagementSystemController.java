@@ -94,7 +94,7 @@ public class inventoryManagementSystemController {
         if (product.getAllAssociatedParts().isEmpty()){
             inventory.deleteProduct(product);
         } else{
-            //TODO throw error here.
+            c482Project.showPopup();
         }
     }
 
