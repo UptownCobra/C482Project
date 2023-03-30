@@ -1,5 +1,20 @@
 package com.example.c482project;
 
+/**
+ *
+ * FUTUREENHANCEMENT ivnentoryManagementSystemController move setModifyPartIndex to ModifyPartController. Logically seems
+ * better in that class
+ *
+ * FUTUREENHANCEMENT Combine addPart and modifyPart
+ *
+ * FUTUREENHANCEMENT Combine addProduct and ModifyProduct
+ *
+ * FUTUREENHANCEMENT make the changeScene its own class so everything can be controlled from one place. Help to remove
+ * redundancy
+ *
+ * FUTUREENHANCEMENT consolidate createProductPredicate createPartPredicate searchFindsProduct searchFindsPart
+ */
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,8 +1,4 @@
 package com.example.c482project;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 //TODO finish documentation for Product class
@@ -31,111 +27,112 @@ public class Product {
     }
 
     /**
-     *
-     * @param id
+     * Sets the id of the Product
+     * @param id int ID of the Product
      */
     public void setId(int id) {this.id = id;
     }
 
     /**
-     *
-     * @param name
+     * Sets the name of the Product
+     * @param name String name value
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     *
-     * @param price
+     * Sets the price of the Product
+     * @param price double price value
      */
     public void setPrice(double price) {
         this.price = price;
     }
 
     /**
-     *
-     * @param stock
+     * Sets the stock of the product
+     * @param stock int stock value
      */
     public void setStock(int stock) {
         this.stock = stock;
     }
 
     /**
-     *
-     * @param min
+     * Sets the minimum value of the Product
+     * @param min int min value
      */
     public void setMin(int min) {
         this.min = min;
     }
 
     /**
-     *
-     * @param max
+     * Sets the maximum value of the Product
+     * @param max int max value
      */
     public void setMax(int max) {
         this.max = max;
     }
 
     /**
-     * @return
+     * Returns the Product ID
+     * @return id
      */
     public int getId() {
         return id;
     }
 
     /**
-     *
-     * @return
+     * Returns the product name
+     * @return name
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @return
+     * Returns the Product price
+     * @return price
      */
     public double getPrice() {
         return price;
     }
 
     /**
-     *
-     * @return
+     * Returns the product Stock
+     * @return stock
      */
     public int getStock() {
         return stock;
     }
 
     /**
-     *
-     * @return
+     * Returns the Products Minimum value
+     * @return min
      */
     public int getMin() {
         return min;
     }
 
     /**
-     *
-     * @return
+     * Returns the Products Maximum value
+     * @return max
      */
     public int getMax() {
         return max;
     }
 
     /**
-     *
-     * @param part
+     * Adds a part the AssosciatedParts list
+     * @param part The part you would like to add to the Products associated parts list
      */
     public void addAssociatedPart(Part part) {
         this.associatedParts.add(part);
     }
 
     /**
-     *
-     * @param selectedAssociatedPart
-     * @return
+     * Deletes the selected associated part
+     * @param selectedAssociatedPart associated part to be deleted
+     * @return true if part exists in associatedParts false if the part does not exist in associatedParts
      */
     public boolean deleteAssociatedPart(Part selectedAssociatedPart) {
         if (associatedParts.contains(selectedAssociatedPart)) {
@@ -147,8 +144,8 @@ public class Product {
     }
 
     /**
-     *
-     * @return
+     * Returns the list of associatedParts
+     * @return associatedParts
      */
     public ObservableList<Part> getAllAssociatedParts() {
         return associatedParts;

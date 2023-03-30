@@ -2,7 +2,6 @@ package com.example.c482project;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -11,15 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.example.c482project.c482Project.*;
-//TODO add redundancy to ensure fields are populated.
-//TODO convert Price to 2 decimal places for appearance
 //TODO combine addParts and modifyParts to reduce redundancy of code. Or make a separate class to include reused functions.
-//TODO •   The application will not crash when inappropriate user data is entered in the forms; instead, error messages should be generated.
 public class AddPartController {
 
     public RadioButton outsourcedRadioBtn;
     public RadioButton inHouseRadioBtn;
-    public Text errorText;
     public TextField idTextField;
     public TextField nameTextField;
     public TextField invTextField;

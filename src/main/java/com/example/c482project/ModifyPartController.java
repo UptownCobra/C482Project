@@ -1,4 +1,7 @@
 package com.example.c482project;
+/**
+ * @author Caleb
+ */
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.example.c482project.c482Project.*;
-//TODO •   The application will not crash when inappropriate user data is entered in the forms; instead, error messages should be generated.
 public class ModifyPartController {
 
     public RadioButton outsourcedRadioBtn;
@@ -38,15 +40,28 @@ public class ModifyPartController {
     private static Part modifyPart;
     public List<Text> errorTextList = new ArrayList<>();
 
-
+    /**
+     * Opens the Inventory management system window
+     * @throws IOException needed for Scene changes
+     */
     public void cancelButtonClicked() throws IOException {
         changeScene("inventory_Management_system.fxml","Inventory Management System", 1284, 517);
     }
+
+    /**
+     * Updates the text for machineID_CompanyNameTextField to Company Name
+     */
     public void onOutsourcedRadioBtnClicked() {
         machineID_CompanyNameLabel.setText("Company Name");
     }
 
-@FXML
+    /**
+     * Verifies that all fields contain the correct type. If a field does not have correct type shows error text
+     * Verifies that min is less than max and inv is between min and max
+     * If all fields contain the correct type we check which radio btn is selected to esure we add the correct Part.
+     * @throws IOException needed for Scene changes
+     */
+    @FXML
     public void onSaveBtnClick() throws IOException {
 
     String comName = "";
@@ -85,12 +100,26 @@ public class ModifyPartController {
     }
 }
 
+    /**
+     * Sets the machineID_CompanyNameLabel text to Machine ID
+     */
     public void onInHouseRadioBtnClick() {
         machineID_CompanyNameLabel.setText("Machine ID");
     }
+
+    /**
+     * Sets modifyPart
+     * @param part new Part
+     */
     public static void setModifyPart(Part part){
         modifyPart = part;
     }
+
+    /**
+     * Adds all ErrorText to errorTextList so all errors can be cleared later
+     * Populates all TextFields with corresponding modifyPart Attributes.
+     * Checks if modifyPart is Outsourced or In-House to ensure we use the correct function
+     */
     @FXML
     public void initialize() {
         idTextField.setText(String.valueOf(modifyPart.getId()));

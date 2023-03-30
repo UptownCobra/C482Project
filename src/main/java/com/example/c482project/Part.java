@@ -1,10 +1,7 @@
 package com.example.c482project;
-/**
- * Supplied class Part.java
- */
 
 /**
- *
+ * Supplied class Part.java
  * @author Caleb Logan
  */
 public abstract class Part {
@@ -24,6 +21,7 @@ public abstract class Part {
     }
 
     /**
+     * Returns Part ID
      * @return the id
      */
     public int getId() {
@@ -31,6 +29,7 @@ public abstract class Part {
     }
 
     /**
+     * Sets part ID
      * @param id the id to set
      */
     public void setId(int id) {
@@ -38,6 +37,7 @@ public abstract class Part {
     }
 
     /**
+     * Return part Name
      * @return the name
      */
     public String getName() {
@@ -45,6 +45,7 @@ public abstract class Part {
     }
 
     /**
+     * Sets the Part Name
      * @param name the name to set
      */
     public void setName(String name) {
@@ -52,6 +53,7 @@ public abstract class Part {
     }
 
     /**
+     * Returns the part price
      * @return the price
      */
     public double getPrice() {
@@ -59,6 +61,7 @@ public abstract class Part {
     }
 
     /**
+     * Sets the part price
      * @param price the price to set
      */
     public void setPrice(double price) {
@@ -66,6 +69,7 @@ public abstract class Part {
     }
 
     /**
+     * Returns part stock
      * @return the stock
      */
     public int getStock() {
@@ -73,6 +77,7 @@ public abstract class Part {
     }
 
     /**
+     * Sets Part Stock
      * @param stock the stock to set
      */
     public void setStock(int stock) {
@@ -80,6 +85,7 @@ public abstract class Part {
     }
 
     /**
+     * returns part min
      * @return the min
      */
     public int getMin() {
@@ -87,6 +93,7 @@ public abstract class Part {
     }
 
     /**
+     * Sets the part min
      * @param min the min to set
      */
     public void setMin(int min) {
@@ -94,6 +101,7 @@ public abstract class Part {
     }
 
     /**
+     * Returns the part Max
      * @return the max
      */
     public int getMax() {
@@ -101,6 +109,7 @@ public abstract class Part {
     }
 
     /**
+     * Sets the part max
      * @param max the max to set
      */
     public void setMax(int max) {

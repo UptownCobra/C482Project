@@ -1,7 +1,12 @@
 package com.example.c482project;
+
+
+
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-//TODO Create documentation for Inventory class
+/**
+ * @author Caleb
+ */
 public class Inventory {
 
     private ObservableList<Part> allParts = FXCollections.observableArrayList();
@@ -12,8 +17,8 @@ public class Inventory {
     }
 
     /**
-     *
-     * @param newProduct
+     * Adds Product to allProducts List
+     * @param newProduct new Product to add
      */
     public void addProduct(Product newProduct) {
         allProducts.add(newProduct);
@@ -47,7 +52,6 @@ public class Inventory {
                 return product;
             }
         }
-        //TODO add return catch all
         return null;
     }
 
