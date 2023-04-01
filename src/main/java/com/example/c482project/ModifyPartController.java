@@ -1,7 +1,5 @@
 package com.example.c482project;
-/**
- * @author Caleb
- */
+
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.example.c482project.c482Project.*;
+/**
+ * @author Caleb
+ */
 public class ModifyPartController {
 
     public RadioButton outsourcedRadioBtn;

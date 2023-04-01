@@ -1,6 +1,5 @@
 package com.example.c482project;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
@@ -10,7 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.example.c482project.c482Project.*;
-//TODO combine addParts and modifyParts to reduce redundancy of code. Or make a separate class to include reused functions.
+/**
+ * @author Caleb
+ */
 public class AddPartController {
 
     public RadioButton outsourcedRadioBtn;
@@ -21,7 +22,6 @@ public class AddPartController {
     public TextField price_costTextField;
     public TextField maxTextField;
     public TextField minTextField;
-    //TODO Figure Out how to make machineIDTextField interchangeable with the Company name TextField
     public TextField machineID_CompanyNameTextField;
     public Button saveBtn;
     public Label machineID_CompanyNameLabel;
@@ -33,15 +33,27 @@ public class AddPartController {
 
     public List<Text> errorTextList = new ArrayList<>();
 
-
+    /**
+     * Opens the Inventory management system window
+     * @throws IOException needed for Scene changes
+     */
     public void cancelButtonClicked() throws IOException {
         c482Project.changeScene("inventory_Management_system.fxml","Inventory Management System", 1284, 550);
     }
+
+    /**
+     * Updates the text for machineID_CompanyNameTextField to Company Name
+     */
     public void onOutsourcedRadioBtnClicked() {
             machineID_CompanyNameLabel.setText("Company Name");
     }
 
-
+    /**
+     * Verifies that all fields contain the correct type. If a field does not have correct type shows error text
+     * Verifies that min is less than max and inv is between min and max
+     * If all fields contain the correct type we check which radio btn is selected to ensure we add the correct Part.
+     * @throws IOException needed for Scene changes
+     */
     public void onSaveBtnClick() throws IOException {
         String comName = "";
         int machineID = -1;
@@ -83,9 +95,16 @@ public class AddPartController {
 
         }
     }
-    public void onInHouseRadioBtnClick(ActionEvent actionEvent) {
+    /**
+     * Sets the machineID_CompanyNameLabel text to Machine ID
+     */
+    public void onInHouseRadioBtnClick() {
         machineID_CompanyNameLabel.setText("Machine ID");
     }
+
+    /**
+     * Initializes errorTextList with all the errorText fields
+     */
     public void initialize() {
         errorTextList.addAll(Arrays.asList(errorTextMinMax,errorTextInv,errorTextCost,errorTextName,errorTextMachineID_CompanyName));
     }

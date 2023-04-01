@@ -1,5 +1,15 @@
 package com.example.c482project;
 
+
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.Objects;
+
 /**
  *
  * FUTUREENHANCEMENT ivnentoryManagementSystemController move setModifyPartIndex to ModifyPartController. Logically seems
@@ -15,17 +25,6 @@ package com.example.c482project;
  * FUTUREENHANCEMENT consolidate createProductPredicate createPartPredicate searchFindsProduct searchFindsPart
  */
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-
-import java.io.IOException;
-import java.util.Objects;
-
-//TODO make a change scene class to remove redundant code
 public class  c482Project extends Application {
 
     private static Stage primaryStage;

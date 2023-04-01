@@ -17,8 +17,10 @@ import java.util.function.Predicate;
 
 import static com.example.c482project.c482Project.*;
 
-//TODO•   The user should not delete a product that has a part associated with it.
-
+/**
+ * Manages the add_Parts.fxml
+ * @author Caleb
+ */
 public class AddProductController {
     public TextField productSearchTextField;
     public TextField idTextField;
@@ -63,18 +65,29 @@ public class AddProductController {
     private FilteredList<Part> partSearchFilteredList = new FilteredList<>(inventory.getAllParts());
     private Product newProduct;
 
-
+    /**
+     * Gets the selected part from partsTableView and adds it to the newProducts Associated Part List
+     */
     public void addBtnClick() {
         Part part = partsTableView.getFocusModel().getFocusedItem();
        newProduct.addAssociatedPart(part);
     }
 
+    /**
+     * Brings up confirmPopup to verify the users decision. If the user confirms then the selected part from the associatedPartTableView
+     * will be deleted from newProducts assosiated Part List
+     */
     public void removeAssociatedPartBtnClick() {
         confirmPopup.showAndWait();
         if (confirmDelete) {
             newProduct.deleteAssociatedPart(associatedPartTableView.getFocusModel().getFocusedItem());
         }
     }
+
+    /**
+     * Uses InputVerification to verify all the textFields. If all checks pass newProduct is added to inventory
+     * @throws IOException needed for scene change
+     */
     public void saveBtnClick() throws IOException {
         InputVerification.resetErrorText(errorTextList);
         if (InputVerification.isTextFieldInputValid(nameTextField,invTextField,price_costTextField,maxTextField,minTextField,nameErrorText,invErrorText,priceErrorText,minMaxErrorText)) {
@@ -99,20 +112,40 @@ public class AddProductController {
 
         }
     }
+
+    /**
+     * Disregards all data and changes the scene back to inventory Management System
+     * @throws IOException needed for scene changes
+     */
     public void cancelBtnClick() throws IOException {
         c482Project.changeScene("inventory_management_system.fxml", "Inventory Management System", 1300,550);
     }
 
+    /**
+     * Checks to see if the SearchText matches a parts name or ID
+     * @param part Part contained in the Parts list in Inventory
+     * @param searchText Text from textField
+     * @return true if parts name or ID contains searchText
+     */
     private boolean searchFindsPart(Part part, String searchText){
         return (part.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(part.getId()).toString().contains(searchText.toLowerCase());
     }
+    /**
+     * Creates a Predicate that is attached as a listener to the textBox. Allows for filtering of the partsList
+     * @param searchText text from search Textbox
+     * @return parts that have a name or ID that contains any searchText
+     */
     private Predicate<Part> createPartPredicate(String searchText){
         return part -> {
             if (searchText == null || searchText.isEmpty()) return true;
             return searchFindsPart(part, searchText);
         };
     }
+    /**
+     * Checks to see if the Parts list is empty
+     * If parts list is empty then display error text.
+     */
     public void checkPartsList() {
         if (partSearchFilteredList.isEmpty()) {
             partsListErrorText.setText("Search did not find any parts");
@@ -120,7 +153,12 @@ public class AddProductController {
             partsListErrorText.setText("");
         }
     }
-
+    /**
+     * initializes errorTextList with all errorText fields
+     * Initializes the partTableView with partSearchFilteredList and sets the CellFactory
+     * Initializes the associatePartTableView with associatedPartSearchFilteredList and sets the CellFactory
+     * Initializes the productSearchTextField with a Predicate that allows for search
+     */
     public void initialize() {
         errorTextList.addAll(Arrays.asList(nameErrorText,invErrorText,priceErrorText,minMaxErrorText));
         idTextField.setText(String.valueOf(productID));
