@@ -25,8 +25,8 @@ public class Inventory {
     }
 
     /**
-     *
-     * @param partId
+     * Allows you to provide a partID and have a part from allParts returned
+     * @param partId int Id of the part you are looking up
      * @return part
      */
     public Part lookupPart(int partId) {
@@ -36,13 +36,12 @@ public class Inventory {
                 return part;
             }
         }
-        //TODO create return catch all
         return null;
     }
 
     /**
-     *
-     * @param productId
+     * Allows you to provide a partID and have a part from allParts returned
+     * @param productId int ID of the product you are looking up
      * @return product
      */
     public Product lookupProduct(int productId) {
@@ -56,8 +55,8 @@ public class Inventory {
     }
 
     /**
-     *
-     * @param partName
+     * Allows you to provide a partName and have a part from allParts returned
+     * @param partName String name of the part you are looking up
      * @return part
      */
     public Part lookupPart(String partName) {
@@ -67,18 +66,15 @@ public class Inventory {
                 return part;
             }
         }
-        //TODO throw error if code gets here
-        //TODO add catch all return
         return null;
     }
 
     /**
-     *
-     * @param productName
+     * Allows you to provide a partName and have a part from allParts returned
+     * @param productName String name of the product you are looking up
      * @return product
      */
     public Product lookupProduct(String productName) {
-        //TODO add try catch for when there is no product matching productName
         for (Product product: allProducts) {
             if (product.getName().equals(productName)) {
                 return product;
@@ -91,27 +87,26 @@ public class Inventory {
     }
 
     /**
-     *
-     * @param index
-     * @param selectedPart
+     * Updates part at index with selectedPart
+     * @param index int index of the Part to update
+     * @param selectedPart Part to replace current part
      */
     public void updatePart(int index, Part selectedPart) {
         this.allParts.set(index, selectedPart);
     }
 
     /**
-     *
-     * @param index
-     * @param selectedProduct
+     * Updates product at index with selectedProduct
+     * @param index int index of the Product to update
+     * @param selectedProduct Product to replace current Product
      */
     public void updateProduct(int index, Product selectedProduct) {
-        //TODO test updateProduct function
         this.allProducts.set(index, selectedProduct);
     }
 
     /**
-     *
-     * @param selectedPart
+     * Deletes selected part from allParts
+     * @param selectedPart Part to delete
      * @return true if selectedPart is found and deleted and false if selectedPart is not found
      */
     public boolean deletePart(Part selectedPart) {
@@ -124,8 +119,8 @@ public class Inventory {
     }
 
     /**
-     *
-     * @param selectedProduct
+     * Deletes selectedProduct from allProducts
+     * @param selectedProduct Product to delete
      * @return true if selectedProduct is found and deleted and false if selectedProduct is not found
      */
     public boolean deleteProduct(Product selectedProduct) {
@@ -137,7 +132,7 @@ public class Inventory {
     }
 
     /**
-     *
+     * Returns allParts ObservableList
      * @return allParts
      */
     public ObservableList<Part> getAllParts() {
@@ -145,7 +140,7 @@ public class Inventory {
     }
 
     /**
-     *
+     * Returns allProducts ObservableList
      * @return allProducts
      */
     public ObservableList<Product> getAllProducts() {
