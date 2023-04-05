@@ -136,10 +136,10 @@ public class InputVerification {
         try {
             int i = Integer.parseInt(tf.getText());
             errorText.setText(fieldName + " must be a String");
-            return true;
+            return false;
         } catch (Exception e) {
             errorText.setText("");
-            return false;
+            return true;
         }
     }
 

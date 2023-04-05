@@ -60,7 +60,7 @@ public class AddPartController {
 
         if (outsourcedRadioBtn.isSelected()) {
             if (InputVerification.isTextFieldString(machineID_CompanyNameTextField, errorTextMachineID_CompanyName, "Company Name")) {
-                comName = machineID_CompanyNameLabel.getText();
+                comName = machineID_CompanyNameTextField.getText();
             }
         } else {
             if (InputVerification.isTextFieldInt(machineID_CompanyNameTextField, errorTextMachineID_CompanyName, "Machine ID")) {
@@ -81,11 +81,13 @@ public class AddPartController {
 
             if (InputVerification.isMinLessMax(min, max, errorTextMinMax) & InputVerification.isStockBetween(min, max, stock, errorTextInv)) {
                 if (outsourcedRadioBtn.isSelected()) {
-                    Outsourced outsourced = new Outsourced(partID, name, price, stock, min, max, comName);
-                    inventory.addPart(outsourced);
+                        Outsourced outsourced = new Outsourced(partID, name, price, stock, min, max, comName);
+                        inventory.addPart(outsourced);
+
                 } else {
-                    InHouse inHouse = new InHouse(partID, name, price, stock, min, max, machineID);
-                    inventory.addPart(inHouse);
+                        InHouse inHouse = new InHouse(partID, name, price, stock, min, max, machineID);
+                        inventory.addPart(inHouse);
+
                 }
 
 

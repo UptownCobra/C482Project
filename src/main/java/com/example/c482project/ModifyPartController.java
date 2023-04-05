@@ -70,7 +70,7 @@ public class ModifyPartController {
 
     if (outsourcedRadioBtn.isSelected()) {
         if (InputVerification.isTextFieldString(machineID_CompanyNameTextField, errorTextMachineID_CompanyName, "Company Name")) {
-            comName = machineID_CompanyNameLabel.getText();
+            comName = machineID_CompanyNameTextField.getText();
         }
     } else {
         if (InputVerification.isTextFieldInt(machineID_CompanyNameTextField, errorTextMachineID_CompanyName, "Machine ID")) {
