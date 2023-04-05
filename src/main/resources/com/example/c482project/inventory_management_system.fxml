@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="1284.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.c482project.inventoryManagementSystemController">
    <children>
-      <Button fx:id="exitButton" layoutX="1179.0" layoutY="478.0" mnemonicParsing="false" onMouseClicked="#onExitButtonClick" prefHeight="25.0" prefWidth="79.0" text="Exit" />
+      <Button fx:id="exitButton" layoutX="1178.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#onExitButtonClick" prefHeight="25.0" prefWidth="79.0" text="Exit" />
       <Pane accessibleText="Parts" layoutX="68.0" layoutY="108.0" prefHeight="336.0" prefWidth="566.0">
          <children>
             <TableView fx:id="partsTableView" layoutX="14.0" layoutY="53.0" prefHeight="233.0" prefWidth="543.0">
